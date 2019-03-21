@@ -1,7 +1,7 @@
 # Lambda School webapi-iv-challenge
-### Hosted at https://ian-be-webapi.herokuapp.com/
+#### Hosted at https://ian-be-webapi.herokuapp.com/
 ---
-#### USERS (/api/users)
+## USERS (/api/users)
 
 ```
 POST create new user https://ian-be-webapi.herokuapp.com/api/users
@@ -24,7 +24,7 @@ PUT update user https://ian-be-webapi.herokuapp.com/api/users/:id
 **DELETE delete user https://ian-be-webapi.herokuapp.com/api/users/:id**
 
 ---
-#### POSTS
+## POSTS
 ##### /api/posts
 
 

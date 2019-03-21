@@ -29,7 +29,7 @@ router.get('/:id', async (req,res) => {
 });
 
 router.post('/', async (req, res) => {
-    if (!req.body.['user_id'] || !req.body.text) {
+    if (!req.body['user_id'] || !req.body.text) {
         res.status(400).json({error:"Missing user id or text"})
     }
     try {
@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
-    if (!req.body.['user_id'] || !req.body.text) {
+    if (!req.body['user_id'] || !req.body.text) {
         res.status(400).json({error:"Missing user id or text"})
     }
     try {
