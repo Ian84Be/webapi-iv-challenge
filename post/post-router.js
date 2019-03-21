@@ -30,7 +30,7 @@ router.get('/:id', async (req,res) => {
 
 router.post('/', async (req, res) => {
     if (!req.body['user_id'] || !req.body.text) {
-        res.status(400).json({error:"Missing user id or text"})
+        res.status(400).json({error:"Missing user id or text"});
     }
     try {
         const newPost = await Posts.insert(req.body);
@@ -38,21 +38,21 @@ router.post('/', async (req, res) => {
         res.status(201).json(newPost);
     }
     catch(err) {
-        res.status(500).json({error:"Failed to add post."})
+        res.status(500).json({error:"Failed to add post."});
     }
 });
 
-router.put('/', async (req, res) => {
+router.put('/:id', async (req, res) => {
     if (!req.body['user_id'] || !req.body.text) {
-        res.status(400).json({error:"Missing user id or text"})
+        res.status(400).json({error:"Missing user id or text"});
     }
     try {
-        const newPost = await Posts.update(req.body);
+        const newPost = await Posts.update(req.params.id, req.body);
         console.log(newPost);
         res.status(201).json(newPost);
     }
     catch(err) {
-        res.status(500).json({error:"Failed to add post."})
+        res.status(500).json({error:"Failed to update post."});
     }
 });
 
