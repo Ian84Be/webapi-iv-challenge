@@ -30,8 +30,7 @@ router.get('/:id', async (req,res) => {
         const posts = await Users.getUserPosts(req.params.id);
         if (posts) {
             res.status(200).json(posts);
-        }
-        else {
+        } else {
             res.status(404).json({error:'User ID not found.'});
         }
     }
@@ -54,20 +53,21 @@ router.post('/', async (req,res) => {
 router.put('/:id', async (req,res) => {
     if (!req.body.name) {
         res.status(400).json({error:"Please provide a name for the user."});
-    }
-    try {
-        let count = await Users.update(req.params.id, req.body);
-        console.log(count);
-
-        if (count) {
-            const post = await Users.getById(req.params.id);
-            res.status(200).json(post);
+    } else {
+        try {
+            let count = await Users.update(req.params.id, req.body);
+            console.log(count);
+    
+            if (count) {
+                const post = await Users.getById(req.params.id);
+                res.status(200).json(post);
+            } else {
+                res.status(404).json({error:'The user with the specified ID does not exist.'});
+            }
         }
-        else {
-            res.status(404).json({error:'The user with the specified ID does not exist.'});
+        catch(err) {
+            res.status(500).json({error:'The user information could not be modified.'});
         }
-    } catch(err) {
-        res.status(500).json({error:'The user information could not be modified.'});
     }
 });
 
@@ -77,8 +77,7 @@ router.delete('/:id', async (req,res) => {
         console.log(count);
         if (count) {
             res.status(200).json({message:'The user has been removed.'});
-        }
-        else {
+        } else {
             res.status(404).json({error:'The user with the specified ID does not exist.'});
         }
     }

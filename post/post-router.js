@@ -6,6 +6,21 @@ const router = express.Router();
 
 
 // server.use('/api/posts', postRouter);
+router.post('/', async (req, res) => {
+    if (!req.body['user_id'] || !req.body.text) {
+        res.status(400).json({error:"Missing user id or text"});
+    } else {
+        try {
+            const newPost = await Posts.insert(req.body);
+            console.log(newPost);
+            res.status(201).json(newPost);
+        }
+        catch(err) {
+            res.status(500).json({error:"Failed to add post."});
+        }
+    }
+});
+
 router.get('/', async (req,res) => {
     try {
         const posts = await Posts.get();
@@ -28,31 +43,18 @@ router.get('/:id', async (req,res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    if (!req.body['user_id'] || !req.body.text) {
-        res.status(400).json({error:"Missing user id or text"});
-    }
-    try {
-        const newPost = await Posts.insert(req.body);
-        console.log(newPost);
-        res.status(201).json(newPost);
-    }
-    catch(err) {
-        res.status(500).json({error:"Failed to add post."});
-    }
-});
-
 router.put('/:id', async (req, res) => {
     if (!req.body['user_id'] || !req.body.text) {
         res.status(400).json({error:"Missing user id or text"});
-    }
-    try {
-        const newPost = await Posts.update(req.params.id, req.body);
-        console.log(newPost);
-        res.status(201).json(newPost);
-    }
-    catch(err) {
-        res.status(500).json({error:"Failed to update post."});
+    } else {
+        try {
+            const newPost = await Posts.update(req.params.id, req.body);
+            console.log(newPost);
+            res.status(201).json(newPost);
+        }
+        catch(err) {
+            res.status(500).json({error:"Failed to update post."});
+        }
     }
 });
 
@@ -62,8 +64,7 @@ router.delete('/:id', async (req,res) => {
         console.log(count);
         if (count) {
             res.status(200).json({message:'The post has been removed.'});
-        }
-        else {
+        } else {
             res.status(404).json({error:'The post with the specified ID does not exist.'});
         }
     }
