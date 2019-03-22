@@ -1,15 +1,51 @@
-# Web API IV Challenge
+# Lambda School webapi-iv-challenge
+#### Hosted at https://ian-be-webapi.herokuapp.com/
+---
+## USERS (/api/users)
 
-In this challenge, you will **deploy** an API of your choosing to `heroku`.
+```
+POST create new user https://ian-be-webapi.herokuapp.com/api/users
+{
+    "name":"newUserName",
+}
+```
 
-## Instructions
+**GET read all users https://ian-be-webapi.herokuapp.com/api/users**
 
-You are allowed, and **encouraged**, to collaborate with other peers. Please follow the twenty-minute rule, before seeking support from your PM and Instructor.
+**GET read user by id https://ian-be-webapi.herokuapp.com/api/users/:id**
 
-## Minimum Viable Product
+```
+PUT update user https://ian-be-webapi.herokuapp.com/api/users/:id
+{
+    "name":"newUserName",
+}
+```
 
-Pick any API, could be one of your past projects, and deploy it to `heroku`. Once deployed, send the URL to the PM for your group.
+**DELETE delete user https://ian-be-webapi.herokuapp.com/api/users/:id**
 
-## Stretch Goal
+---
+## POSTS
+##### /api/posts
 
-- add support for environment variables using `.env` files. You can use the [dotenv](https://www.npmjs.com/package/dotenv) npm module.
+
+```
+POST create new post https://ian-be-webapi.herokuapp.com/api/posts
+{
+    "user_id":"existingUserId",
+    "text":"newCommentText"
+}
+```
+
+**GET read all posts https://ian-be-webapi.herokuapp.com/api/posts**
+
+**GET read post by id https://ian-be-webapi.herokuapp.com/api/posts/:id**
+
+```
+PUT update post https://ian-be-webapi.herokuapp.com/api/posts/:id
+{
+    "user_id":"existingUserId",
+    "text":"newCommentText"
+}
+```
+
+**DELETE delete post https://ian-be-webapi.herokuapp.com/api/posts/:id**
